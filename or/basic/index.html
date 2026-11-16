@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+        <title>Cobrowsing demo</title>
+        <style>
+            input, textarea {
+                text-align: left;
+                width: 20em;
+            }
+        </style>
+
+        <!-- OpenReplay Tracking Code for my first project -->
+        <script>
+        var initOpts = {
+            projectKey: "gHVK6bnlLjqGnUuyoeFO",
+            defaultInputMode: 1,
+            obscureTextNumbers: true,
+            obscureTextEmails: true,
+        };
+        var startOpts = { userID: "" };
+        (function(A,s,a,y,e,r){
+            r=window.OpenReplay=[e,r,y,[s-1, e]];
+            s=document.createElement('script');s.src=A;s.async=!a;
+            document.getElementsByTagName('head')[0].appendChild(s);
+            r.start=function(v){r.push([0])};
+            r.stop=function(v){r.push([1])};
+            r.setUserID=function(id){r.push([2,id])};
+            r.setUserAnonymousID=function(id){r.push([3,id])};
+            r.setMetadata=function(k,v){r.push([4,k,v])};
+            r.event=function(k,p,i){r.push([5,k,p,i])};
+            r.issue=function(k,p){r.push([6,k,p])};
+            r.isActive=function(){return false};
+            r.getSessionToken=function(){};
+        })("https://static.openreplay.com/latest/openreplay-assist.js",1,0,initOpts,startOpts);
+        </script>
+    </head>
+
+    <body>
+        <p><br/></p>
+
+        <h3>Welcome to the cobrowsing demo!</h3>
+
+        <hr/>
+
+        <p><br/></p>
+
+        <p>This webpage simulates a Web payment interface.</p>
+
+        <p><br/></p>
+
+        <p><strong>Checkout information:</strong></p>
+        <ul>
+           <li>Amount: 1234,56€</li>
+           <li>Name: <span id="name"></span></li>
+           <li>Email: <span id="email"></span></li>
+           <li>Birth date: <span id="birthdate"></span></li>
+           <li>IBAN: <span id="iban"></span></li>
+        </ul>
+
+        <table cellpadding="10">
+            <tbody>
+                <tr>
+                    <td>
+                        First Name <font color="red">*</font> :
+                    </td>
+                    <td>
+                        <input type="text" size="128" id="firstNameInput" placeholder="">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        Last name <font color="red">*</font> :
+                    </td>
+                    <td>
+                        <input type="text" size="128" id="lastNameInput" placeholder="">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        Email <font color="red">*</font> :
+                    </td>
+                    <td>
+                        <input type="text" size="128" id="emailInput" placeholder="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Birth date <font color="red">*</font> :
+                    </td>
+                    <td>
+                        <input type="text" size="128" id="birthDateInput" placeholder="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        IBAN <font color="red">*</font> :
+                    </td>
+                    <td>
+                        <input type="text" size="128" id="ibanInput" placeholder="FR76 XXXX">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <button id="setPaymentInfo" type="button">Set payment info</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <p></p>
+
+        
+
+    <script>
+        document.getElementById("setPaymentInfo").addEventListener("click", async function()
+            {
+                var firstname = document.getElementById("firstNameInput").value;
+                var lastname = document.getElementById("lastNameInput").value;
+                var email = document.getElementById("emailInput").value;
+                var birthdate = document.getElementById("birthDateInput").value;
+                var iban = document.getElementById("ibanInput").value;
+
+                document.getElementById("name").innerText = firstname + " " + lastname;
+                document.getElementById("email").innerText = email;
+                document.getElementById("birthdate").innerText = birthdate;
+                document.getElementById("iban").innerText = iban;
+            },
+        false);
+    </script>
+
+</body></html>

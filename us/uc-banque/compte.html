@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axia Banque — Mes comptes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .filter-chip {
+      padding:6px 14px; border-radius:999px; font-size:.82rem; font-weight:500;
+      border:1px solid var(--gray-300); background:var(--white); cursor:pointer;
+      color:var(--gray-600); transition:all .15s;
+    }
+    .filter-chip:hover, .filter-chip.active { background:var(--primary); color:white; border-color:var(--primary); }
+    .account-switcher { display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
+    .account-tab {
+      display:flex; flex-direction:column; gap:3px;
+      padding:14px 20px; border-radius:var(--radius); background:var(--white);
+      border:2px solid var(--gray-200); cursor:pointer; transition:all .15s;
+      min-width:160px;
+    }
+    .account-tab:hover { border-color:var(--primary); }
+    .account-tab.active { border-color:var(--primary); background:var(--primary-light); }
+    .account-tab .at-type { font-size:.75rem; font-weight:600; color:var(--gray-500); text-transform:uppercase; }
+    .account-tab .at-balance { font-size:1.2rem; font-weight:700; color:var(--gray-900); }
+    .account-tab.active .at-type { color:var(--primary); }
+    .account-tab.active .at-balance { color:var(--primary); }
+    .search-box { position:relative; }
+    .search-box input { padding-left:36px; }
+    .search-box svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--gray-400); }
+  </style>
+  <script src="cobrowsing.js"></script>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <a href="dashboard.html" class="topbar-brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="brand-name">Axia <span>Banque</span></span>
+    </a>
+    <div class="topbar-nav">
+      <a href="dashboard.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </a>
+      <a href="compte.html" class="nav-link active">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Mes comptes
+      </a>
+      <a href="virement.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Virements
+      </a>
+      <a href="support.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Support
+      </a>
+    </div>
+    <div class="topbar-right">
+      <button class="notif-btn">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="notif-dot"></span>
+      </button>
+      <span class="topbar-user">Marie Dupont</span>
+      <div class="avatar" onclick="window.location.href='index.html'">MD</div>
+    </div>
+  </nav>
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Navigation</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Tableau de bord
+        </a>
+        <a href="compte.html" class="sidebar-link active">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          Mes comptes
+        </a>
+        <a href="virement.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Virements
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+          Carte bancaire
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Épargne
+        </a>
+      </div>
+      <div class="sidebar-section" style="margin-top:8px;">
+        <div class="sidebar-label">Autres</div>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Documents
+          <span class="badge badge-blue">3</span>
+        </a>
+        <a href="support.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Support
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <div class="page-header">
+        <div class="breadcrumb"><a href="dashboard.html">Tableau de bord</a> / Mes comptes</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;">
+          <h1>Mes comptes</h1>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-secondary btn-sm" onclick="downloadRIB()">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              RIB
+            </button>
+            <a href="virement.html" class="btn btn-primary btn-sm">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Nouveau virement
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account switcher tabs -->
+      <div class="account-switcher">
+        <div class="account-tab active" onclick="switchAccount('courant', this)">
+          <div class="at-type">Compte courant</div>
+          <div class="at-balance no-upscope">7 234,12 €</div>
+          <div style="font-size:.75rem;color:var(--gray-400)">FR76 3000 ···· 1234</div>
+        </div>
+        <div class="account-tab" onclick="switchAccount('epargne', this)">
+          <div class="at-type">Livret A</div>
+          <div class="at-balance no-upscope">9 500,00 €</div>
+          <div style="font-size:.75rem;color:var(--gray-400)">FR76 3000 ···· 5678</div>
+        </div>
+        <div class="account-tab" onclick="switchAccount('pea', this)">
+          <div class="at-type">PEA</div>
+          <div class="at-balance no-upscope">1 686,42 €</div>
+          <div style="font-size:.75rem;color:var(--gray-400)">FR76 3000 ···· 9012</div>
+        </div>
+      </div>
+
+      <!-- Account detail card -->
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-size:.8rem;color:var(--gray-500);margin-bottom:4px;" id="accountTypeLabel">Compte courant — Solde disponible</div>
+            <div style="font-size:2.4rem;font-weight:800;color:var(--gray-900);" id="accountBalance" class="no-upscope">7 234,12 €</div>
+            <div style="font-size:.85rem;color:var(--gray-500);margin-top:4px;" id="accountIBAN">IBAN : FR76 3000 6000 0112 3456 7890 189</div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <span class="badge badge-green" id="accountStatus">✓ Actif</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transactions -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Historique des opérations</span>
+          <div style="display:flex;gap:8px;">
+            <div class="search-box">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+              </svg>
+              <input class="form-input" type="search" placeholder="Rechercher…" style="width:200px;font-size:.85rem;" oninput="filterTx(this.value)">
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="exportCSV()">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-chip active" onclick="filterCat('all', this)">Toutes</button>
+          <button class="filter-chip" onclick="filterCat('income', this)">Entrées</button>
+          <button class="filter-chip" onclick="filterCat('expense', this)">Sorties</button>
+          <button class="filter-chip" onclick="filterCat('transfer', this)">Virements</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="txTable">
+            <thead>
+              <tr>
+                <th style="width:36px;"></th>
+                <th>Libellé</th>
+                <th>Catégorie</th>
+                <th>Date</th>
+                <th>Solde après</th>
+                <th>Montant</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody id="txBody">
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-200);">
+          <span style="font-size:.85rem;color:var(--gray-500)">Affichage 1–15 sur 42 opérations</span>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-secondary btn-sm">← Précédent</button>
+            <button class="btn btn-primary btn-sm">Suivant →</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const accounts = {
+      courant: {
+        label: 'Compte courant — Solde disponible',
+        balance: '7 234,12 €',
+        iban: 'IBAN : FR76 3000 6000 0112 3456 7890 189',
+        status: '✓ Actif'
+      },
+      epargne: {
+        label: 'Livret A — Épargne réglementée',
+        balance: '9 500,00 €',
+        iban: 'IBAN : FR76 3000 6000 0156 7890 1234 567',
+        status: '✓ Actif · Taux 3,00%'
+      },
+      pea: {
+        label: 'Plan d\'Épargne en Actions',
+        balance: '1 686,42 €',
+        iban: 'Référence : PEA-2019-8472',
+        status: '✓ Actif · Perf. +8,3%'
+      }
+    };
+
+    const allTransactions = [
+      { type:'income',   merchant:'Virement salaire — Acme Corp',  cat:'Revenus',        date:'01/03/2026', solde:'7 234,12 €', amount:'+3 200,00 €', status:'Reçu' },
+      { type:'expense',  merchant:'Loyer Mars — SCI Les Pins',      cat:'Logement',       date:'01/03/2026', solde:'4 034,12 €', amount:'−980,00 €',   status:'Effectué' },
+      { type:'expense',  merchant:'Carrefour Market',                cat:'Alimentation',   date:'28/02/2026', solde:'5 014,12 €', amount:'−67,43 €',    status:'Effectué' },
+      { type:'transfer', merchant:'Virement → Livret A',            cat:'Épargne',        date:'27/02/2026', solde:'5 081,55 €', amount:'−300,00 €',    status:'Effectué' },
+      { type:'expense',  merchant:'Netflix',                         cat:'Abonnements',    date:'25/02/2026', solde:'5 381,55 €', amount:'−17,99 €',     status:'En cours' },
+      { type:'expense',  merchant:'EDF Particuliers',               cat:'Charges',        date:'24/02/2026', solde:'5 399,54 €', amount:'−124,00 €',    status:'Effectué' },
+      { type:'expense',  merchant:'SNCF Voyageurs',                 cat:'Transport',      date:'22/02/2026', solde:'5 523,54 €', amount:'−58,00 €',     status:'Effectué' },
+      { type:'income',   merchant:'Remboursement Pierre D.',        cat:'Revenus divers', date:'21/02/2026', solde:'5 581,54 €', amount:'+40,00 €',     status:'Reçu' },
+      { type:'expense',  merchant:'Pharmacie du Centre',            cat:'Santé',          date:'19/02/2026', solde:'5 541,54 €', amount:'−23,50 €',     status:'Effectué' },
+      { type:'expense',  merchant:'Fnac — Commande en ligne',       cat:'Loisirs',        date:'17/02/2026', solde:'5 565,04 €', amount:'−89,90 €',     status:'Effectué' },
+      { type:'transfer', merchant:'Virement entrant — J. Martin',   cat:'Virements',      date:'15/02/2026', solde:'5 654,94 €', amount:'+150,00 €',    status:'Reçu' },
+      { type:'expense',  merchant:'Spotify',                        cat:'Abonnements',    date:'14/02/2026', solde:'5 504,94 €', amount:'−10,99 €',     status:'Effectué' },
+      { type:'expense',  merchant:'Total Energies — Essence',       cat:'Transport',      date:'12/02/2026', solde:'5 515,93 €', amount:'−65,00 €',     status:'Effectué' },
+      { type:'expense',  merchant:'La Poste — Lettre recommandée',  cat:'Services',       date:'10/02/2026', solde:'5 580,93 €', amount:'−5,80 €',      status:'Effectué' },
+      { type:'expense',  merchant:'Orange Mobile',                  cat:'Télécom',        date:'08/02/2026', solde:'5 586,73 €', amount:'−24,99 €',     status:'Effectué' },
+    ];
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function renderTable() {
+      const tbody = document.getElementById('txBody');
+      const rows = allTransactions.filter(tx => {
+        const matchCat = currentFilter === 'all' || tx.type === currentFilter;
+        const matchSearch = tx.merchant.toLowerCase().includes(currentSearch) || tx.cat.toLowerCase().includes(currentSearch);
+        return matchCat && matchSearch;
+      });
+
+      tbody.innerHTML = rows.map(tx => {
+        const iconClass = tx.type;
+        const icon = tx.type === 'income' ? '↓' : tx.type === 'transfer' ? '⇄' : '↑';
+        const amountClass = tx.amount.startsWith('+') ? 'positive' : 'negative';
+        const badgeClass = tx.status === 'Reçu' || tx.status === 'Effectué' ? 'badge-green' : 'badge-yellow';
+        return `
+          <tr>
+            <td><div class="tx-icon ${iconClass}">${icon}</div></td>
+            <td><div class="tx-merchant no-upscope">${tx.merchant}</div></td>
+            <td><span class="badge badge-gray">${tx.cat}</span></td>
+            <td style="color:var(--gray-500);font-size:.85rem;white-space:nowrap">${tx.date}</td>
+            <td style="font-size:.85rem;color:var(--gray-600)" class="no-upscope">${tx.solde}</td>
+            <td class="tx-amount ${amountClass} no-upscope">${tx.amount}</td>
+            <td><span class="badge ${badgeClass}">${tx.status}</span></td>
+          </tr>`;
+      }).join('');
+    }
+
+    function switchAccount(id, el) {
+      document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      const a = accounts[id];
+      document.getElementById('accountTypeLabel').textContent = a.label;
+      document.getElementById('accountBalance').textContent = a.balance;
+      document.getElementById('accountIBAN').textContent = a.iban;
+      document.getElementById('accountStatus').textContent = a.status;
+    }
+
+    function filterCat(cat, el) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      renderTable();
+    }
+
+    function filterTx(val) {
+      currentSearch = val.toLowerCase();
+      renderTable();
+    }
+
+    function downloadRIB() { alert('Téléchargement du RIB en cours… (simulation)'); }
+    function exportCSV() { alert('Export CSV en cours… (simulation)'); }
+
+    renderTable();
+
+    // Handle URL param
+    const params = new URLSearchParams(window.location.search);
+    const acId = params.get('id');
+    if (acId && accounts[acId]) {
+      const tabs = document.querySelectorAll('.account-tab');
+      const map = { courant: 0, epargne: 1, pea: 2 };
+      if (map[acId] !== undefined) {
+        tabs.forEach(t => t.classList.remove('active'));
+        tabs[map[acId]].classList.add('active');
+        switchAccount(acId, tabs[map[acId]]);
+      }
+    }
+  </script>
+</body>
+</html>

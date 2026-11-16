@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axia Banque — Tableau de bord</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="cobrowsing.js"></script>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <a href="dashboard.html" class="topbar-brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="brand-name">Axia <span>Banque</span></span>
+    </a>
+
+    <div class="topbar-nav">
+      <a href="dashboard.html" class="nav-link active">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </a>
+      <a href="compte.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Mes comptes
+      </a>
+      <a href="virement.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Virements
+      </a>
+      <a href="support.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Support
+      </a>
+    </div>
+
+    <div class="topbar-right">
+      <button class="notif-btn" onclick="showNotif()">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+        </svg>
+        <span class="notif-dot"></span>
+      </button>
+      <span class="topbar-user">Marie Dupont</span>
+      <div class="avatar" onclick="window.location.href='index.html'" title="Se déconnecter">MD</div>
+    </div>
+  </nav>
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Navigation</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Tableau de bord
+        </a>
+        <a href="compte.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          Mes comptes
+        </a>
+        <a href="virement.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Virements
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+          Carte bancaire
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Épargne
+        </a>
+      </div>
+
+      <div class="sidebar-section" style="margin-top:8px;">
+        <div class="sidebar-label">Autres</div>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Documents
+          <span class="badge badge-blue">3</span>
+        </a>
+        <a href="support.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Support
+          <span class="badge badge-red">1</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Mon profil
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Bonjour, Marie 👋</h1>
+        <p style="color:var(--gray-500);margin-top:4px;font-size:.9rem;">Mercredi 4 mars 2026 · Votre solde global est en bonne santé.</p>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="quick-actions">
+        <a href="virement.html" class="quick-action">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          <span>Virement</span>
+        </a>
+        <a href="#" class="quick-action" onclick="showComingSoon(event)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/>
+          </svg>
+          <span>Recharge</span>
+        </a>
+        <a href="#" class="quick-action" onclick="showComingSoon(event)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/>
+          </svg>
+          <span>Paiement</span>
+        </a>
+        <a href="#" class="quick-action" onclick="showComingSoon(event)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/>
+          </svg>
+          <span>Épargne</span>
+        </a>
+        <a href="support.html" class="quick-action">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+          <span>Support</span>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card primary">
+          <div class="stat-label">Solde total</div>
+          <div class="stat-value">18 420,54 €</div>
+          <div class="stat-change up">↑ +234,12 € ce mois</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dépenses ce mois</div>
+          <div class="stat-value">1 847,30 €</div>
+          <div class="stat-change down">↑ +12% vs mois dernier</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Revenus ce mois</div>
+          <div class="stat-value">3 200,00 €</div>
+          <div class="stat-change up">↑ Salaire reçu</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Taux d'épargne</div>
+          <div class="stat-value">42%</div>
+          <div class="stat-change up">↑ Objectif atteint</div>
+        </div>
+      </div>
+
+      <!-- Accounts -->
+      <h2 style="margin-bottom:14px;">Mes comptes</h2>
+      <div class="accounts-grid">
+        <a href="compte.html?id=courant" class="account-card blue">
+          <div class="account-type">Compte courant</div>
+          <div class="account-number">FR76 3000 •••• •••• 1234</div>
+          <div class="account-balance">7 234,12 €</div>
+          <div class="account-currency">EUR · Disponible immédiatement</div>
+          <div class="account-chip"></div>
+        </a>
+        <a href="compte.html?id=epargne" class="account-card green">
+          <div class="account-type">Livret A</div>
+          <div class="account-number">FR76 3000 •••• •••• 5678</div>
+          <div class="account-balance">9 500,00 €</div>
+          <div class="account-currency">EUR · Taux 3,00% / an</div>
+          <div class="account-chip"></div>
+        </a>
+        <a href="compte.html?id=pea" class="account-card purple">
+          <div class="account-type">PEA</div>
+          <div class="account-number">FR76 3000 •••• •••• 9012</div>
+          <div class="account-balance">1 686,42 €</div>
+          <div class="account-currency">EUR · +8,3% performance</div>
+          <div class="account-chip"></div>
+        </a>
+      </div>
+
+      <!-- Two columns: Transactions + Chart -->
+      <div class="dashboard-main-grid">
+
+        <!-- Recent transactions -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Dernières opérations</span>
+            <a href="compte.html" class="btn btn-sm btn-secondary">Tout voir</a>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:36px;"></th>
+                  <th>Libellé</th>
+                  <th>Date</th>
+                  <th>Montant</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="tx-icon income">↓</div></td>
+                  <td><div class="tx-merchant" data-openreplay-obscured>Virement salaire</div><div class="tx-category">Revenus</div></td>
+                  <td style="color:var(--gray-500);font-size:.85rem;">01 mars</td>
+                  <td class="tx-amount positive">+3 200,00 €</td>
+                  <td><span class="badge badge-green">Reçu</span></td>
+                </tr>
+                <tr>
+                  <td><div class="tx-icon expense">↑</div></td>
+                  <td><div class="tx-merchant" data-openreplay-obscured>Loyer Mars</div><div class="tx-category">Logement</div></td>
+                  <td style="color:var(--gray-500);font-size:.85rem;">01 mars</td>
+                  <td class="tx-amount negative">−980,00 €</td>
+                  <td><span class="badge badge-green">Effectué</span></td>
+                </tr>
+                <tr>
+                  <td><div class="tx-icon expense">↑</div></td>
+                  <td><div class="tx-merchant" data-openreplay-obscured>Carrefour Market</div><div class="tx-category">Alimentation</div></td>
+                  <td style="color:var(--gray-500);font-size:.85rem;">28 fév.</td>
+                  <td class="tx-amount negative">−67,43 €</td>
+                  <td><span class="badge badge-green">Effectué</span></td>
+                </tr>
+                <tr>
+                  <td><div class="tx-icon transfer">⇄</div></td>
+                  <td><div class="tx-merchant" data-openreplay-obscured>Virement vers Livret A</div><div class="tx-category">Épargne</div></td>
+                  <td style="color:var(--gray-500);font-size:.85rem;">27 fév.</td>
+                  <td class="tx-amount negative">−300,00 €</td>
+                  <td><span class="badge badge-green">Effectué</span></td>
+                </tr>
+                <tr>
+                  <td><div class="tx-icon expense">↑</div></td>
+                  <td><div class="tx-merchant" data-openreplay-obscured >Netflix</div><div class="tx-category">Abonnements</div></td>
+                  <td style="color:var(--gray-500);font-size:.85rem;">25 fév.</td>
+                  <td class="tx-amount negative">−17,99 €</td>
+                  <td><span class="badge badge-yellow">En cours</span></td>
+                </tr>
+                <tr>
+                  <td><div class="tx-icon expense">↑</div></td>
+                  <td><div class="tx-merchant" data-openreplay-obscured>EDF — Facture énergie</div><div class="tx-category">Charges</div></td>
+                  <td style="color:var(--gray-500);font-size:.85rem;">24 fév.</td>
+                  <td class="tx-amount negative">−124,00 €</td>
+                  <td><span class="badge badge-green">Effectué</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="dashboard-right-column">
+
+          <!-- Spending chart -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Dépenses / mois</span>
+              <span style="font-size:.8rem;color:var(--gray-400)">2026</span>
+            </div>
+            <div class="chart-area">
+              <div class="chart-bar" style="height:60%"></div>
+              <div class="chart-bar" style="height:80%"></div>
+              <div class="chart-bar" style="height:45%"></div>
+              <div class="chart-bar" style="height:70%"></div>
+              <div class="chart-bar" style="height:55%"></div>
+              <div class="chart-bar current" style="height:58%"></div>
+            </div>
+            <div class="chart-labels">
+              <div class="chart-label">Oct</div>
+              <div class="chart-label">Nov</div>
+              <div class="chart-label">Déc</div>
+              <div class="chart-label">Jan</div>
+              <div class="chart-label">Fév</div>
+              <div class="chart-label" style="color:var(--primary);font-weight:600">Mar</div>
+            </div>
+          </div>
+
+          <!-- Répartition dépenses -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Répartition</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+                  <span>Logement</span><span style="font-weight:600">53%</span>
+                </div>
+                <div style="height:6px;background:var(--gray-100);border-radius:99px">
+                  <div style="height:100%;width:53%;background:var(--primary);border-radius:99px"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+                  <span>Alimentation</span><span style="font-weight:600">18%</span>
+                </div>
+                <div style="height:6px;background:var(--gray-100);border-radius:99px">
+                  <div style="height:100%;width:18%;background:#8b5cf6;border-radius:99px"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+                  <span>Charges</span><span style="font-weight:600">14%</span>
+                </div>
+                <div style="height:6px;background:var(--gray-100);border-radius:99px">
+                  <div style="height:100%;width:14%;background:#f59e0b;border-radius:99px"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+                  <span>Abonnements</span><span style="font-weight:600">8%</span>
+                </div>
+                <div style="height:6px;background:var(--gray-100);border-radius:99px">
+                  <div style="height:100%;width:8%;background:#10b981;border-radius:99px"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+                  <span>Autres</span><span style="font-weight:600">7%</span>
+                </div>
+                <div style="height:6px;background:var(--gray-100);border-radius:99px">
+                  <div style="height:100%;width:7%;background:var(--gray-300);border-radius:99px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alerte -->
+          <div class="alert alert-warning">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4m0 4h.01"/>
+            </svg>
+            <div>
+              <strong>Prélèvement à venir</strong><br>
+              <span style="font-size:.82rem">SFR Mobile — 24,99 € le 8 mars</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function showNotif() {
+      alert('Notifications :\n• Prélèvement SFR le 8 mars : 24,99 €\n• Votre relevé de février est disponible.');
+    }
+    function showComingSoon(e) {
+      e.preventDefault();
+      alert('Fonctionnalité à venir dans la prochaine version.');
+    }
+  </script>
+</body>
+</html>

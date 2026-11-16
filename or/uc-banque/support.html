@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axia Banque — Support client</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .support-grid { display:grid; grid-template-columns:1fr 360px; gap:24px; }
+    .contact-channel {
+      display:flex; align-items:flex-start; gap:14px;
+      padding:18px; border-radius:var(--radius); border:1px solid var(--gray-200);
+      background:var(--white); margin-bottom:12px; cursor:pointer; transition:all .15s;
+    }
+    .contact-channel:hover { border-color:var(--primary); box-shadow:var(--shadow-md); }
+    .channel-icon {
+      width:44px; height:44px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .channel-title { font-weight:600; font-size:.95rem; margin-bottom:3px; }
+    .channel-desc { font-size:.82rem; color:var(--gray-500); line-height:1.5; }
+    .channel-tag { margin-top:6px; }
+    .ticket-item {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:14px; border-radius:var(--radius-sm); border:1px solid var(--gray-200);
+      margin-bottom:8px; background:var(--white);
+    }
+    .ticket-num { font-size:.75rem; color:var(--gray-400); font-family:monospace; }
+    .ticket-title { font-weight:500; font-size:.875rem; margin-bottom:2px; }
+    .ticket-date { font-size:.75rem; color:var(--gray-400); }
+    .rating-stars { display:flex; gap:4px; margin:8px 0; }
+    .star { font-size:1.4rem; cursor:pointer; color:var(--gray-300); transition:color .1s; }
+    .star.active, .star:hover { color:#f59e0b; }
+    @media (max-width:900px) { .support-grid { grid-template-columns:1fr; } }
+  </style>
+  <script src="cobrowsing.js"></script>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <a href="dashboard.html" class="topbar-brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      </div>
+      <span class="brand-name">Axia <span>Banque</span></span>
+    </a>
+    <div class="topbar-nav">
+      <a href="dashboard.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </a>
+      <a href="compte.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Mes comptes
+      </a>
+      <a href="virement.html" class="nav-link">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Virements
+      </a>
+      <a href="support.html" class="nav-link active">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Support
+      </a>
+    </div>
+    <div class="topbar-right">
+      <button class="notif-btn">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="notif-dot"></span>
+      </button>
+      <span class="topbar-user">Marie Dupont</span>
+      <div class="avatar" onclick="window.location.href='index.html'">MD</div>
+    </div>
+  </nav>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Navigation</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Tableau de bord
+        </a>
+        <a href="compte.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          Mes comptes
+        </a>
+        <a href="virement.html" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Virements
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+          Carte bancaire
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Épargne
+        </a>
+      </div>
+      <div class="sidebar-section" style="margin-top:8px;">
+        <div class="sidebar-label">Autres</div>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Documents
+          <span class="badge badge-blue">3</span>
+        </a>
+        <a href="support.html" class="sidebar-link active">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Support
+          <span class="badge badge-red">1</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Mon profil
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div class="breadcrumb"><a href="dashboard.html">Tableau de bord</a> / Support</div>
+        <h1 style="margin-top:4px;">Centre d'aide</h1>
+        <p style="color:var(--gray-500);margin-top:4px;font-size:.9rem;">Notre équipe est disponible du lundi au vendredi, 8h–20h, et le samedi 9h–17h.</p>
+      </div>
+
+      <!-- Cobrowsing banner -->
+      <div class="alert alert-info" style="margin-bottom:24px;align-items:center;gap:14px;">
+        <div style="flex-shrink:0;width:40px;height:40px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#1a56db" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <div style="flex:1;">
+          <strong>Co-navigation disponible</strong> — Un conseiller peut rejoindre votre session et vous guider directement sur votre écran.
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="startCobrowsing()">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.277A1 1 0 0121 8.67V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-3.67a1 1 0 00-.553-.894L15 14"/><rect x="7" y="10" width="8" height="6" rx="1"/></svg>
+          Démarrer une session
+        </button>
+      </div>
+
+      <div class="support-grid">
+
+        <!-- Left column -->
+        <div>
+          <!-- Contact channels -->
+          <h2 style="margin-bottom:16px;">Nous contacter</h2>
+
+          <div class="contact-channel" onclick="openContactForm()">
+            <div class="channel-icon" style="background:#dbeafe;">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#1a56db" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div style="flex:1;">
+              <div class="channel-title">Messagerie sécurisée</div>
+              <div class="channel-desc">Envoyez-nous un message, réponse sous 2h en heure ouvrée.</div>
+              <div class="channel-tag"><span class="badge badge-green">En ligne</span></div>
+            </div>
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--gray-300)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+
+          <div class="contact-channel" onclick="alert('Connexion à la file d\'attente téléphonique… (simulation)')">
+            <div class="channel-icon" style="background:#dcfce7;">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+              </svg>
+            </div>
+            <div style="flex:1;">
+              <div class="channel-title">Téléphone</div>
+              <div class="channel-desc">0 800 000 123 — Numéro gratuit · Temps d'attente estimé : <strong>3 min</strong></div>
+              <div class="channel-tag"><span class="badge badge-green">Disponible</span></div>
+            </div>
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--gray-300)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+
+          <div class="contact-channel" onclick="startCobrowsing()">
+            <div class="channel-icon" style="background:#f3e8ff;">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+              </svg>
+            </div>
+            <div style="flex:1;">
+              <div class="channel-title">Co-navigation guidée</div>
+              <div class="channel-desc">Un conseiller vous accompagne visuellement sur votre espace. Zéro prise en main, vous restez maître de votre écran.</div>
+              <div class="channel-tag"><span class="badge badge-blue">Recommandé</span></div>
+            </div>
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--gray-300)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+
+          <div class="contact-channel" onclick="alert('Prise de rendez-vous… (simulation)')">
+            <div class="channel-icon" style="background:#fef3c7;">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+              </svg>
+            </div>
+            <div style="flex:1;">
+              <div class="channel-title">Rendez-vous conseiller</div>
+              <div class="channel-desc">Planifiez un entretien téléphonique ou en agence selon votre disponibilité.</div>
+              <div class="channel-tag"><span class="badge badge-gray">Prochaine dispo : demain 10h</span></div>
+            </div>
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--gray-300)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+
+          <!-- FAQ -->
+          <h2 style="margin:28px 0 16px;">Questions fréquentes</h2>
+
+          <div class="card">
+            <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+              <button class="filter-chip active" onclick="filterFaq('all',this)" style="padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:500;border:1px solid var(--gray-300);background:var(--primary);color:white;cursor:pointer;">Tout</button>
+              <button class="filter-chip" onclick="filterFaq('compte',this)" style="padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:500;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-600);cursor:pointer;">Compte</button>
+              <button class="filter-chip" onclick="filterFaq('carte',this)" style="padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:500;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-600);cursor:pointer;">Carte</button>
+              <button class="filter-chip" onclick="filterFaq('virement',this)" style="padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:500;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-600);cursor:pointer;">Virements</button>
+              <button class="filter-chip" onclick="filterFaq('securite',this)" style="padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:500;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-600);cursor:pointer;">Sécurité</button>
+            </div>
+
+            <div id="faqList">
+              <div class="faq-item" data-cat="compte">
+                <div class="faq-question" onclick="toggleFaq(this)">Comment obtenir mon RIB ?</div>
+                <div class="faq-answer">Rendez-vous dans <strong>Mes comptes</strong>, sélectionnez votre compte courant, puis cliquez sur le bouton <strong>RIB</strong> en haut à droite. Vous pouvez le télécharger en PDF ou le partager directement par e-mail.</div>
+              </div>
+              <div class="faq-item" data-cat="virement">
+                <div class="faq-question" onclick="toggleFaq(this)">Quel est le délai d'exécution d'un virement SEPA ?</div>
+                <div class="faq-answer">Les virements SEPA sont traités en <strong>J+1 ouvré</strong>. Un virement initié avant 17h un jour ouvré sera crédité chez le bénéficiaire le lendemain ouvré. Les virements instantanés (SEPA Instant) sont disponibles 24h/24 et crédités en quelques secondes.</div>
+              </div>
+              <div class="faq-item" data-cat="carte">
+                <div class="faq-question" onclick="toggleFaq(this)">Comment faire opposition sur ma carte bancaire ?</div>
+                <div class="faq-answer">En cas de perte ou vol, appelez immédiatement le <strong>0 892 705 705</strong> (numéro d'urgence interbancaire, disponible 24h/24). Vous pouvez aussi bloquer temporairement votre carte depuis l'espace <strong>Carte bancaire</strong> dans votre espace client.</div>
+              </div>
+              <div class="faq-item" data-cat="securite">
+                <div class="faq-question" onclick="toggleFaq(this)">Qu'est-ce que la co-navigation et est-ce sécurisé ?</div>
+                <div class="faq-answer">La co-navigation permet à votre conseiller de voir votre écran (en lecture seule) pour vous guider. Il ne peut <strong>jamais prendre le contrôle</strong> de votre souris ou clavier. Toutes les données sensibles (mots de passe, numéros de carte complets) sont automatiquement masquées. Vous pouvez arrêter la session à tout moment.</div>
+              </div>
+              <div class="faq-item" data-cat="compte">
+                <div class="faq-question" onclick="toggleFaq(this)">Comment modifier mon adresse ou mes coordonnées ?</div>
+                <div class="faq-answer">Accédez à <strong>Mon profil</strong> via le menu de gauche. Les modifications d'adresse prennent effet immédiatement pour les communications électroniques. Pour les courriers, un délai de 2–3 jours ouvrés est à prévoir.</div>
+              </div>
+              <div class="faq-item" data-cat="virement">
+                <div class="faq-question" onclick="toggleFaq(this)">Puis-je annuler un virement programmé ?</div>
+                <div class="faq-answer">Oui, un virement programmé peut être annulé jusqu'à la veille de sa date d'exécution à 18h. Rendez-vous dans <strong>Virements</strong> puis sélectionnez <strong>Virements programmés</strong> pour le supprimer.</div>
+              </div>
+              <div class="faq-item" data-cat="securite">
+                <div class="faq-question" onclick="toggleFaq(this)">Je reçois des appels suspects se réclamant de la banque, que faire ?</div>
+                <div class="faq-answer">Axia Banque ne vous demandera <strong>jamais</strong> vos codes secrets, votre mot de passe ou vos numéros de carte par téléphone. En cas de doute, raccrochez et rappelez-nous au <strong>0 800 000 123</strong>. Signalez tout appel suspect via ce formulaire.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <!-- Contact form -->
+          <div class="card" id="contactFormCard">
+            <div class="card-header"><span class="card-title">Envoyer un message</span></div>
+            <form id="contactForm" onsubmit="submitContact(event)">
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Objet <span class="required">*</span></label>
+                  <select class="form-select" id="contactSubject">
+                    <option value="">— Choisir un objet —</option>
+                    <option>Problème de connexion</option>
+                    <option>Question sur un virement</option>
+                    <option>Contestation d'opération</option>
+                    <option>Carte bancaire</option>
+                    <option>Produits d'épargne</option>
+                    <option>Modification de mes informations</option>
+                    <option>Autre demande</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Priorité</label>
+                  <div style="display:flex;gap:8px;">
+                    <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:.875rem;">
+                      <input type="radio" name="priority" value="normal" checked> Normale
+                    </label>
+                    <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:.875rem;">
+                      <input type="radio" name="priority" value="urgent"> Urgente
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Message <span class="required">*</span></label>
+                  <textarea class="form-textarea" id="contactMessage" placeholder="Décrivez votre problème ou question…" style="min-height:120px;"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Pièce jointe (optionnel)</label>
+                  <input type="file" class="form-input" style="padding:6px;" accept=".pdf,.jpg,.png">
+                  <span class="form-hint">PDF, JPG ou PNG · Max 5 Mo</span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                  <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4z"/></svg>
+                  Envoyer le message
+                </button>
+              </div>
+            </form>
+            <div id="contactSuccess" style="display:none;text-align:center;padding:20px 0;">
+              <div style="font-size:2rem;margin-bottom:8px;">✅</div>
+              <div style="font-weight:600;color:var(--secondary);margin-bottom:4px;">Message envoyé !</div>
+              <div style="font-size:.85rem;color:var(--gray-500)">Vous recevrez une réponse sous 2h en heure ouvrée.</div>
+              <div style="font-size:.82rem;color:var(--gray-400);margin-top:8px;">Référence : <code>#AXB-2026-8842</code></div>
+              <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="resetContact()">Nouveau message</button>
+            </div>
+          </div>
+
+          <!-- Mes tickets -->
+          <div class="card">
+            <div class="card-header"><span class="card-title">Mes demandes</span></div>
+            <div>
+              <div class="ticket-item">
+                <div>
+                  <div class="ticket-num">#AXB-2026-8712</div>
+                  <div class="ticket-title">Contestation prélèvement inconnu</div>
+                  <div class="ticket-date">Ouvert le 28 fév. 2026</div>
+                </div>
+                <span class="badge badge-yellow" style="margin-left:auto;flex-shrink:0;">En cours</span>
+              </div>
+              <div class="ticket-item">
+                <div>
+                  <div class="ticket-num">#AXB-2026-7903</div>
+                  <div class="ticket-title">Demande de relevé annuel 2025</div>
+                  <div class="ticket-date">Ouvert le 10 fév. 2026</div>
+                </div>
+                <span class="badge badge-green" style="margin-left:auto;flex-shrink:0;">Résolu</span>
+              </div>
+              <div class="ticket-item">
+                <div>
+                  <div class="ticket-num">#AXB-2026-6544</div>
+                  <div class="ticket-title">Blocage paiement en ligne</div>
+                  <div class="ticket-date">Ouvert le 3 jan. 2026</div>
+                </div>
+                <span class="badge badge-green" style="margin-left:auto;flex-shrink:0;">Résolu</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Satisfaction -->
+          <div class="card">
+            <div class="card-header"><span class="card-title">Votre avis</span></div>
+            <p style="font-size:.875rem;color:var(--gray-600);margin-bottom:8px;">Comment évaluez-vous notre service client ?</p>
+            <div class="rating-stars" id="ratingStars">
+              <span class="star" onclick="rate(1)">★</span>
+              <span class="star" onclick="rate(2)">★</span>
+              <span class="star" onclick="rate(3)">★</span>
+              <span class="star" onclick="rate(4)">★</span>
+              <span class="star" onclick="rate(5)">★</span>
+            </div>
+            <div id="ratingFeedback" style="display:none;margin-top:8px;">
+              <textarea class="form-textarea" placeholder="Un commentaire ? (optionnel)" style="min-height:60px;font-size:.85rem;"></textarea>
+              <button class="btn btn-primary btn-sm btn-full" style="margin-top:8px;" onclick="submitRating()">Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Cobrowsing session modal -->
+  <div class="modal-overlay" id="cobrowsingModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Démarrer une co-navigation</h3>
+        <button class="modal-close" onclick="document.getElementById('cobrowsingModal').classList.remove('open')">&times;</button>
+      </div>
+      <div class="alert alert-info" style="margin-bottom:16px;">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Le conseiller ne verra votre écran qu'en <strong>lecture seule</strong>. Aucune prise de contrôle possible.
+      </div>
+      <p style="font-size:.9rem;color:var(--gray-600);margin-bottom:16px;">
+        Partagez ce code à votre conseiller pour démarrer la session :
+      </p>
+      <div style="text-align:center;padding:20px;background:var(--gray-50);border-radius:var(--radius-sm);margin-bottom:16px;">
+        <div style="font-size:2.2rem;font-weight:800;letter-spacing:.15em;color:var(--primary);font-family:monospace;" id="sessionCode">847 293</div>
+        <div style="font-size:.78rem;color:var(--gray-400);margin-top:4px;">Code valable 10 minutes</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#16a34a;animation:pulse 1.5s infinite;"></div>
+        <span style="font-size:.875rem;color:var(--gray-600)">En attente du conseiller…</span>
+      </div>
+      <div class="modal-actions" style="justify-content:space-between;">
+        <button class="btn btn-secondary" onclick="document.getElementById('cobrowsingModal').classList.remove('open')">Annuler</button>
+        <button class="btn btn-danger btn-sm" onclick="document.getElementById('cobrowsingModal').classList.remove('open')">Terminer la session</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .filter-chip { padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:500;border:1px solid var(--gray-300);background:var(--white);cursor:pointer;color:var(--gray-600);transition:all .15s; }
+    .filter-chip:hover { background:var(--primary);color:white;border-color:var(--primary); }
+    .filter-chip.active { background:var(--primary);color:white;border-color:var(--primary); }
+  </style>
+
+  <script>
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+
+    function filterFaq(cat, btn) {
+      document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+
+    function openContactForm() {
+      document.getElementById('contactFormCard').scrollIntoView({ behavior:'smooth' });
+    }
+
+    function submitContact(e) {
+      e.preventDefault();
+      const subj = document.getElementById('contactSubject').value;
+      const msg = document.getElementById('contactMessage').value.trim();
+      if (!subj) { alert('Veuillez sélectionner un objet.'); return; }
+      if (!msg) { alert('Veuillez saisir votre message.'); return; }
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Envoi…';
+      setTimeout(() => {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('contactSuccess').style.display = 'block';
+      }, 1200);
+    }
+
+    function resetContact() {
+      document.getElementById('contactForm').style.display = 'block';
+      document.getElementById('contactSuccess').style.display = 'none';
+      document.getElementById('contactForm').reset();
+      document.getElementById('contactForm').querySelector('button[type=submit]').disabled = false;
+      document.getElementById('contactForm').querySelector('button[type=submit]').innerHTML = `
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4z"/></svg>
+        Envoyer le message`;
+    }
+
+    function startCobrowsing() {
+      // Generate random 6-digit code
+      const code = Math.floor(100000 + Math.random() * 900000).toString().replace(/(\d{3})(\d{3})/, '$1 $2');
+      document.getElementById('sessionCode').textContent = code;
+      document.getElementById('cobrowsingModal').classList.add('open');
+    }
+
+    document.getElementById('cobrowsingModal').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+
+    let selectedRating = 0;
+    function rate(n) {
+      selectedRating = n;
+      document.querySelectorAll('.star').forEach((s, i) => {
+        s.classList.toggle('active', i < n);
+      });
+      document.getElementById('ratingFeedback').style.display = 'block';
+    }
+
+    function submitRating() {
+      document.getElementById('ratingFeedback').innerHTML = `<div style="color:var(--secondary);font-weight:600;text-align:center;padding:8px 0;">Merci pour votre retour ! 🙏</div>`;
+    }
+  </script>
+</body>
+</html>
